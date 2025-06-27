@@ -7,7 +7,7 @@ namespace DataAccessLayer
         public static AccountMember GetAccountById(string accountID)
         {
             using var db = new MyStoreContext();
-            return db.AccountMembers.FirstOrDefault(c => c.MemberID.Equals(accountID));
+            return db.AccountMember.FirstOrDefault(c => c.MemberID.Equals(accountID));
         }
     }
 }
