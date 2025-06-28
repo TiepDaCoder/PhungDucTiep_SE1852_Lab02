@@ -26,7 +26,7 @@ namespace WPFApp
                 var catList = iCategoryService.GetCategories();
                 cboCategory.ItemsSource = catList;
                 cboCategory.DisplayMemberPath = "CategoryName";
-                cboCategory.SelectedValuePath = "CategoryId";
+                cboCategory.SelectedValuePath = "CategoryID";
             }
             catch (Exception ex)
             {
@@ -38,7 +38,6 @@ namespace WPFApp
             try
             {
                 var productList = iProductService.GetProducts();
-                MessageBox.Show($"Loaded {productList.Count} products.");
                 dgData.ItemsSource = productList;
             }
             catch (Exception ex)
@@ -77,16 +76,14 @@ namespace WPFApp
         }
         private void dgData_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DataGrid dataGrid = sender as DataGrid;
-            DataGridRow row = (DataGridRow)dataGrid.ItemContainerGenerator.ContainerFromIndex(dataGrid.SelectedIndex);
-            DataGridCell RowColumn = dataGrid.Columns[0].GetCellContent(row).Parent as DataGridCell;
-            string id = ((TextBlock)RowColumn.Content).Text;
-            Product product = iProductService.GetProductById(Int32.Parse(id));
-            txtProductID.Text = product.ProductID.ToString();
-            txtProductName.Text = product.ProductName;
-            txtPrice.Text = product.UnitPrice.ToString();
-            txtUnitsInStock.Text = product.UnitsInStock.ToString();
-            cboCategory.SelectedValue = product.CategoryID;
+            if (dgData.SelectedItem is Product product)
+            {
+                txtProductID.Text = product.ProductID.ToString();
+                txtProductName.Text = product.ProductName;
+                txtPrice.Text = product.UnitPrice.ToString();
+                txtUnitsInStock.Text = product.UnitsInStock.ToString();
+                cboCategory.SelectedValue = product.CategoryID;
+            }
         }
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {

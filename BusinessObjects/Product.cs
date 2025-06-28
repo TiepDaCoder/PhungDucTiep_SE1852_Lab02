@@ -8,7 +8,7 @@ namespace BusinessObjects
         public int ProductID { get; set; }
         public string ProductName { get; set; }
         public int CategoryID { get; set; }
-        public int UnitsInStock { get; set; }
+        public short UnitsInStock { get; set; }
         public Decimal UnitPrice { get; set; }
     }
 }

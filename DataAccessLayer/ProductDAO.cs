@@ -4,16 +4,19 @@ namespace DataAccessLayer
 {
     public class ProductDAO
     {
+        public static List<Product> products = new List<Product>();
         public static List<Product> GetProducts()
         {
-            var listProducts = new List<Product>();
             try
             {
                 using var db = new MyStoreContext();
-                listProducts = db.Products.ToList();
+                products = db.Products.ToList();
+                return products;
             }
-            catch (Exception e) { }
-            return listProducts;
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
         public static void SaveProduct(Product p)
         {
